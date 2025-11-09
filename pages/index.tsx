@@ -26,7 +26,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState<string>('');
   const [summary, setSummary] = useState<string | null>(null);
-  const [exports, setExports] = useState<ApiResponse['data']['exports'] | null>(null);
+  const [exports, setExports] = useState<{ md: string; txt: string; pdf: string; docx: string; } | null>(null);
   const [error, setError] = useState('');
   const [result, setResult] = useState<any>(null);
   const [isOnline, setIsOnline] = useState(true);
