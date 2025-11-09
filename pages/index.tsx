@@ -234,26 +234,34 @@ export default function Home() {
       )}
 
       <header className="text-center mb-4 mb-md-5 position-relative">
-        {/* Admin Button */}
+        {/* Admin Button - More Visible */}
         <a 
           href="/admin" 
-          className="btn btn-sm position-absolute top-0 end-0"
+          className="btn position-absolute"
           style={{
-            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(6, 182, 212, 0.3))',
-            border: '1px solid rgba(168, 85, 247, 0.5)',
-            color: '#a855f7',
+            top: '0',
+            right: '0',
+            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.5))',
+            border: '2px solid rgba(168, 85, 247, 0.8)',
+            color: '#fff',
             borderRadius: '12px',
-            padding: '8px 16px',
+            padding: '10px 20px',
+            fontSize: '14px',
+            fontWeight: '600',
             backdropFilter: 'blur(10px)',
             transition: 'all 0.3s ease',
+            boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)',
+            zIndex: 10,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.5))';
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.7), rgba(6, 182, 212, 0.7))';
             e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 0 30px rgba(168, 85, 247, 0.6)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(6, 182, 212, 0.3))';
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.5))';
             e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 0 20px rgba(168, 85, 247, 0.4)';
           }}
         >
           <i className="bi bi-shield-lock me-2"></i>Admin
