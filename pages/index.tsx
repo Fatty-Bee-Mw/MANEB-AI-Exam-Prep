@@ -233,7 +233,32 @@ export default function Home() {
         </div>
       )}
 
-      <header className="text-center mb-4 mb-md-5">
+      <header className="text-center mb-4 mb-md-5 position-relative">
+        {/* Admin Button */}
+        <a 
+          href="/admin" 
+          className="btn btn-sm position-absolute top-0 end-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(6, 182, 212, 0.3))',
+            border: '1px solid rgba(168, 85, 247, 0.5)',
+            color: '#a855f7',
+            borderRadius: '12px',
+            padding: '8px 16px',
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.5))';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(6, 182, 212, 0.3))';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          <i className="bi bi-shield-lock me-2"></i>Admin
+        </a>
+
         <h1 className="fw-bold display-5 mb-3 neon-header">🎓 MANEB Exam Prep AI</h1>
         <p className="lead mb-2" style={{color: '#d1d5db'}}>Transform past papers into powerful revision notes</p>
         <p className="small" style={{color: '#9ca3af'}}>Upload exam papers and textbooks • Get AI-powered summaries • Download in multiple formats</p>
@@ -261,21 +286,41 @@ export default function Home() {
                     <p className="card-text text-muted small mb-0">Upload up to 10 files (PDF, DOCX, or images)</p>
                   </div>
                 </div>
+                <label 
+                  htmlFor="examFiles" 
+                  className="neon-button w-100 d-block text-center py-3 mb-2"
+                  style={{ cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.6 : 1 }}
+                >
+                  <i className="bi bi-cloud-upload me-2"></i>
+                  {examFiles && examFiles.length > 0 
+                    ? `${examFiles.length} file${examFiles.length > 1 ? 's' : ''} selected` 
+                    : 'Choose Files or Take Photo'
+                  }
+                </label>
                 <input 
                   id="examFiles"
                   type="file" 
-                  className="neon-input"
+                  className="d-none"
                   multiple 
-                  accept=".pdf,.docx,.jpg,.jpeg,.png"
+                  accept=".pdf,.docx,.jpg,.jpeg,.png,image/*"
+                  capture="environment"
                   onChange={(e) => setExamFiles(e.target.files)}
                   disabled={loading}
                 />
                 {examFiles && examFiles.length > 0 && (
                   <div className="mt-2">
-                    <small className="text-neon-cyan">
-                      <i className="bi bi-check-circle me-1"></i>
-                      {examFiles.length} file{examFiles.length > 1 ? 's' : ''} selected
-                    </small>
+                    {Array.from(examFiles).map((file, idx) => (
+                      <div key={idx} className="d-flex align-items-center justify-content-between mb-1 p-2" 
+                           style={{background: 'rgba(6, 182, 212, 0.1)', borderRadius: '8px'}}>
+                        <small className="text-neon-cyan text-truncate me-2">
+                          <i className="bi bi-file-earmark me-1"></i>
+                          {file.name}
+                        </small>
+                        <small className="text-muted">
+                          {(file.size / 1024 / 1024).toFixed(2)} MB
+                        </small>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -292,20 +337,33 @@ export default function Home() {
                     <p className="card-text text-muted small mb-0">Upload your subject textbook (PDF only)</p>
                   </div>
                 </div>
+                <label 
+                  htmlFor="textbook" 
+                  className="neon-button w-100 d-block text-center py-3 mb-2"
+                  style={{ cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.6 : 1 }}
+                >
+                  <i className="bi bi-cloud-upload me-2"></i>
+                  {textbookFile ? textbookFile.name : 'Choose File'}
+                </label>
                 <input 
                   id="textbook"
                   type="file" 
-                  className="neon-input"
-                  accept=".pdf" 
+                  className="d-none"
+                  accept=".pdf,application/pdf" 
                   onChange={(e) => setTextbookFile(e.target.files?.[0] || null)}
                   disabled={loading}
                 />
                 {textbookFile && (
-                  <div className="mt-2">
-                    <small className="text-neon-cyan">
-                      <i className="bi bi-check-circle me-1"></i>
-                      {textbookFile.name}
-                    </small>
+                  <div className="mt-2 p-2" style={{background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px'}}>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <small className="text-neon-green text-truncate me-2">
+                        <i className="bi bi-file-pdf me-1"></i>
+                        {textbookFile.name}
+                      </small>
+                      <small className="text-muted">
+                        {(textbookFile.size / 1024 / 1024).toFixed(2)} MB
+                      </small>
+                    </div>
                   </div>
                 )}
               </div>
