@@ -175,7 +175,7 @@ async function processHandler(req: NextApiRequest, res: NextApiResponse) {
     const corpus = extractedPieces.join('\n\n');
 
     if (corpus.trim().length < 50) {
-      logger.error('Insufficient content extracted', { 
+      logger.error('Insufficient content extracted', undefined, { 
         corpusLength: corpus.trim().length,
         filesProcessed: savedExamPaths.length,
         extractedLengths: extractedPieces.map((p, i) => ({ 
