@@ -24,11 +24,10 @@ export default function Home() {
   const [examFiles, setExamFiles] = useState<FileList | null>(null);
   const [textbookFile, setTextbookFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState<string>('');
+  const [progress, setProgress] = useState<string | null>(null);
   const [summary, setSummary] = useState<string | null>(null);
   const [exports, setExports] = useState<{ md: string; txt: string; pdf: string; docx: string; } | null>(null);
-  const [error, setError] = useState('');
-  const [result, setResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(true);
 
   // Feedback form state
@@ -39,7 +38,7 @@ export default function Home() {
     comment: '',
   });
   const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
   // Track page view on mount
