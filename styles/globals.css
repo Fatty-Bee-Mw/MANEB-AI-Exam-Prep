@@ -1,0 +1,13 @@
+:root {
+  --maneb-blue: #e9f2ff;
+  --maneb-gold: #d4af37;
+}
+
+body {
+  background: linear-gradient(180deg, var(--maneb-blue), #ffffff);
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 8px;
+}

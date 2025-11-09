@@ -1,0 +1,85 @@
+============================================================
+  ENVIRONMENT VARIABLES FOR NETLIFY
+============================================================
+
+Copy these to Netlify Dashboard → Site Settings → Environment Variables
+
+IMPORTANT: Copy the values from your .env file!
+
+============================================================
+
+Variable Name: OPENAI_API_KEY
+Value: (Your OpenAI API key from .env file)
+
+Variable Name: OPENAI_MODEL  
+Value: gpt-4o-mini
+
+Variable Name: ADMIN_PASSWORD
+Value: Fatty@Likagwa
+
+Variable Name: NOTIFICATION_EMAIL
+Value: ylikagwa@gmail.com
+
+Variable Name: WHATSAPP_NUMBER
+Value: +265880646248
+
+Variable Name: NODE_VERSION
+Value: 18
+
+============================================================
+
+HOW TO ADD IN NETLIFY:
+
+1. Go to: https://app.netlify.com/
+2. Select your site
+3. Go to: Site configuration → Environment variables
+4. Click "Add a variable"
+5. For each variable above:
+   - Enter the Variable Name
+   - Enter the Value
+   - Click "Create variable"
+6. After adding all variables, click "Trigger deploy"
+
+============================================================
+
+OPTIONAL VARIABLES (if you have them):
+
+Variable Name: SMTP_HOST
+Value: (Your SMTP server, e.g., smtp.gmail.com)
+
+Variable Name: SMTP_PORT
+Value: 587
+
+Variable Name: SMTP_USER
+Value: (Your email)
+
+Variable Name: SMTP_PASSWORD
+Value: (Your email app password)
+
+Variable Name: TWILIO_ACCOUNT_SID
+Value: (Your Twilio SID if using WhatsApp)
+
+Variable Name: TWILIO_AUTH_TOKEN
+Value: (Your Twilio auth token)
+
+Variable Name: TWILIO_WHATSAPP_FROM
+Value: whatsapp:+14155238886
+
+============================================================
+
+VERIFICATION:
+
+After deployment, test:
+✓ Homepage loads
+✓ AI summary generation works
+✓ Downloads work
+✓ Admin panel works (/admin)
+✓ Feedback form works
+
+If something doesn't work, check:
+1. All environment variables are set correctly
+2. No typos in variable names
+3. API keys are valid
+4. Click "Trigger deploy" → "Clear cache and deploy"
+
+============================================================
