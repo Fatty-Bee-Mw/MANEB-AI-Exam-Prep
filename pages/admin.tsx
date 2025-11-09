@@ -46,14 +46,29 @@ export default function AdminDashboard() {
 
   const fetchAnalytics = async (pass: string) => {
     setLoading(true);
-    setError('');
+    setError(null);
     
     try {
       const res = await fetch('/api/admin/analytics', {
         headers: {
           'Authorization': `Bearer ${pass}`,
+          'Content-Type': 'application/json',
         },
       });
+      
+      // Check if response is OK
+      if (!res.ok) {
+        if (res.status === 401) {
+          throw new Error('Invalid password. Please try again.');
+        }
+        throw new Error(`Server error: ${res.status}`);
+      }
+      
+      // Check if response is JSON
+      const contentType = res.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('API route not found. Please check deployment.');
+      }
       
       const result = await res.json();
       
@@ -64,7 +79,8 @@ export default function AdminDashboard() {
       setData(result.data);
       setIsAuthenticated(true);
     } catch (err: any) {
-      setError(err.message);
+      console.error('Admin fetch error:', err);
+      setError(err.message || 'Failed to connect to admin API');
       setIsAuthenticated(false);
     } finally {
       setLoading(false);

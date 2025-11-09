@@ -20,6 +20,9 @@ function isAuthorized(req: NextApiRequest): boolean {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Set JSON header immediately
+  res.setHeader('Content-Type', 'application/json');
+  
   // Only allow GET requests
   if (req.method !== 'GET') {
     return res.status(405).json({
@@ -38,10 +41,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   try {
-    // Get analytics summary
-    const summary = getAnalyticsSummary();
-    const allFeedback = getAllFeedback();
-    const feedbackStats = getFeedbackStats();
+    // Get analytics summary with error handling
+    const summary = getAnalyticsSummary() || {
+      totalPageViews: 0,
+      totalUploads: 0,
+      totalDownloads: 0,
+      totalFeedback: 0,
+      uniqueUsers: 0,
+      feedbackStats: { excellent: 0, good: 0, average: 0, poor: 0, total: 0 },
+      downloadsByFormat: { pdf: 0, docx: 0, txt: 0, md: 0 },
+      recentActivity: { uploads: [], downloads: [], sessions: [] },
+      lastUpdated: new Date().toISOString(),
+    };
+    
+    const allFeedback = getAllFeedback() || [];
+    const feedbackStats = getFeedbackStats() || { excellent: 0, good: 0, average: 0, poor: 0, total: 0 };
     
     // Calculate additional metrics
     const today = new Date().toISOString().split('T')[0];
